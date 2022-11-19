@@ -1,4 +1,5 @@
 import sys
+import argparse
 
 def encrypt(text,s):
     result = ""
@@ -21,9 +22,16 @@ def encrypt(text,s):
             result+=i
     return result
 
+parser = argparse.ArgumentParser(description='Descifra un fichero de texto en codigo cesar por fuerza bruta')
+
+parser.add_argument("entrada",help="el nombre del fichero a Desencriptar", type=str)
 
 
-f = open(sys.argv[1],"r")
+args= parser.parse_args()
+
+
+
+f = open(args.entrada,"r")
 text = f.read()
 for i in range(26):
     clave = "clave : "+ str(i) + " " + encrypt(text,-i)

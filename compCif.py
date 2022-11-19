@@ -1,5 +1,6 @@
 import sys
 import gzip
+import argparse
 
 def encrypt(text,s):
     result = ""
@@ -23,11 +24,25 @@ def encrypt(text,s):
     return result
 
 
-s = sys.argv[1]
-f = open(sys.argv[2],"r")
-f2= open (sys.argv[3],"w")
+parser = argparse.ArgumentParser(description='Cifra un fichero de texto en codigo cesar con desplazamiento k y lo comprime en gzip')
+
+parser.add_argument("entrada",help="el nombre del fichero a encriptar", type=str)
+
+parser.add_argument("desplazamiento",help="el numero de letras a desplazar el caracter",type=int)
+
+parser.add_argument("-o", dest="outputFile", type=str, metavar="salida.txt",help="especifica el nombre del fichero de salida")
+
+args= parser.parse_args()
+
+if args.outputFile == None:
+    print("No se han introducido los parametros correctemante: prog desplazamiento entrada -o salida")
+    exit()
+
+
+
+f = open(args.entrada,"r")
 text = f.read()
 
-comp = sys.argv[3]+".gz"
+comp = args.outputFile+".gz"
 with gzip.open(comp,"wb") as file:
-    file.write(encrypt(text,int(s)))
+    file.write(encrypt(text,args.desplazamiento))

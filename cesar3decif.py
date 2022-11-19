@@ -1,4 +1,5 @@
 import sys
+import argparse
 
 def encrypt(text,s):
     result = ""
@@ -21,8 +22,20 @@ def encrypt(text,s):
             result+=i
     return result
 
+parser = argparse.ArgumentParser(description='Descifra un fichero de texto en codigo cesar con desplazamiento 3')
 
-f = open(sys.argv[1],"r")
-f2= open (sys.argv[2],"w")
+parser.add_argument("entrada",help="el nombre del fichero a Desencriptar", type=str)
+
+parser.add_argument("-o", dest="outputFile", type=str, metavar="salida.txt",help="especifica el nombre del fichero de salida")
+
+args= parser.parse_args()
+
+if args.outputFile == None:
+    print("No se han introducido los parametros correctemante: prog entrada -o salida")
+    exit()
+
+
+f = open(args.entrada,"r")
+f2= open (args.outputFile,"w")
 text = f.read()
 f2.write(encrypt(text,-3))
