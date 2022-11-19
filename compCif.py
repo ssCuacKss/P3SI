@@ -25,6 +25,7 @@ def encrypt(text,s):
 
 s = sys.argv[1]
 f = open(sys.argv[2],"r")
+f2= open (sys.argv[3],"w")
 text = f.read()
 
 comp = sys.argv[3]+".gz"
