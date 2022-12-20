@@ -25,14 +25,11 @@ for ch in text:
         text_freq[ch] += 1
 
 
-print(text_freq)
-
 count = 0
 
 for rep in text_freq:
     count += text_freq[rep]
 
-print(count)
 
 for rep in text_freq:
     text_freq[rep] = round((text_freq[rep]/count)*100,2)
